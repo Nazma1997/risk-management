@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import { isAuthenticate } from '../middleware/authenticate';
 import { isAuthorize } from '../middleware/authorize';
-import { createItem, getAllItems, updateItem } from '../controllers/item';
+import { approveItem, createItem, getAllItems, reviewItem, updateItem } from '../controllers/item';
 
 const router: Router = express.Router();
 
@@ -13,11 +13,11 @@ router.post('/create', isAuthenticate, isAuthorize({
 router.post('/:id/review', isAuthenticate, isAuthorize({
     hasRole:['officer'],
     allowSameUser: true
-}), updateItem)
+}), reviewItem)
 router.post('/:id/approve', isAuthenticate, isAuthorize({
     hasRole:['manager'],
     allowSameUser: true
-}), updateItem)
+}), approveItem)
 router.get('/', isAuthenticate, isAuthorize({
     hasRole:['manager', 'officer'],
     allowSameUser: true

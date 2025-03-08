@@ -28,8 +28,13 @@ export const createItem = async (
     next: NextFunction
 ): Promise<void> => {
     try {
+        const data = {
+            ...req.body,
+            is_reviewed: 0,
+            is_approved: 0
+        }
 
-        const item: Item = await itemService.createItem(req.body);
+        const item: Item = await itemService.createItem(data);
 
         res.status(201).json(
             {
@@ -58,6 +63,55 @@ export const updateItem = async (
         res.status(200).json(
             {
                 message: 'Updated successfully',
+                item: updated
+            }
+        );
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const reviewItem = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+
+        const updated: Item = await itemService.updateItem(
+            req.params.id,
+           {
+            is_reviewed: true
+           }
+        );
+
+        res.status(200).json(
+            {
+                message: 'Reviewd successfully',
+                item: updated
+            }
+        );
+    } catch (error) {
+        next(error);
+    }
+};
+export const approveItem = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+
+        const updated: Item = await itemService.updateItem(
+            req.params.id,
+           {
+            is_approved: true
+           }
+        );
+
+        res.status(200).json(
+            {
+                message: 'Approved successfully',
                 item: updated
             }
         );
