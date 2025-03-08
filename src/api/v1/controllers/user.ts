@@ -23,7 +23,7 @@ export const userDetails = async (req: Request, res: Response, next: NextFunctio
         next(error)
     }
 }
-export const getUserToken = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const { email, password } = req.body;
 
     try {

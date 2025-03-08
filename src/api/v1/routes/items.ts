@@ -10,11 +10,11 @@ router.post('/create', isAuthenticate, isAuthorize({
     allowSameUser: true
 }), createItem)
 
-router.post('/:id/review', isAuthenticate, isAuthorize({
+router.put('/:id/review', isAuthenticate, isAuthorize({
     hasRole:['officer'],
     allowSameUser: true
 }), reviewItem)
-router.post('/:id/approve', isAuthenticate, isAuthorize({
+router.put('/:id/approve', isAuthenticate, isAuthorize({
     hasRole:['manager'],
     allowSameUser: true
 }), approveItem)
