@@ -12,8 +12,8 @@ export const signToken = async ({ email, password }: { email: string; password: 
         const userCredential = await signInWithEmailAndPassword(clientAuth, email, password);
         if (userCredential.user) {
             // Get the ID token
-            return await userCredential.user.getIdToken();
-       
+      return  await userCredential.user.getIdToken();
+          
    
         } else {
             throw new Error("User is null");

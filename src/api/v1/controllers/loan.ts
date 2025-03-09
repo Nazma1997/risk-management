@@ -36,7 +36,7 @@ export const createItem = async (
 
         const item: Item = await itemService.createItem(data);
 
-        res.status(201).json(
+      res.status(201).json(
             {
                 message: 'Item created susscssfully',
                 item: item

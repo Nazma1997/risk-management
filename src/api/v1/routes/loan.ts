@@ -24,7 +24,7 @@ router.get('/', isAuthenticate, isAuthorize({
     allowSameUser: true
 }), getAllItems)
 router.delete(
-    "/:id",
+    "/:id/delete",
     isAuthenticate,
     isAuthorize({ hasRole: ["admin", "manager"] }),
     deleteItem

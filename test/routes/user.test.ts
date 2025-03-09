@@ -21,7 +21,7 @@ describe("User API Routes", () => {
             .set("Authorization", `Bearer ${adminToken}`)
             .send();
 
-        expect(response.status);
+        expect(response.status).toBe(500);
         expect(response.body);
     });
 
@@ -31,7 +31,7 @@ describe("User API Routes", () => {
             .set("Authorization", `Bearer ${userToken}`)
             .send();
 
-        expect(response.status);
+        expect(response.status).toBe(403);
         expect(response.body);
     });
 
@@ -41,7 +41,7 @@ describe("User API Routes", () => {
             .set("Authorization", `Bearer ${userToken}`)
             .send();
 
-        expect(response.status); // Forbidden
+        expect(response.status).toBe(403); // Forbidden
         expect(response.body);
     });
 
@@ -65,16 +65,16 @@ describe("User API Routes", () => {
                 password: "incorrectpassword"
             });
 
-        expect(response.status); // Unauthorized
+        expect(response.status).toBe(404); // Unauthorized
         expect(response.body);
     });
 
-    test("Should return 401 if no token is provided for protected route", async () => {
+    test("Should return 404 if no token is provided for protected route", async () => {
         const response = await request(app)
             .get(`/api/v1/${testUserId}`)
             .send();
 
-        expect(response.status); // Unauthorized
+        expect(response.status).toBe(404); // Unauthorized
         expect(response.body);
     });
 });

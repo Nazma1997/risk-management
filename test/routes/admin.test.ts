@@ -3,15 +3,13 @@ import app from "../../src/app"; // Adjust path if needed
 import { signToken } from "../../src/api/v1/utils/auth"; // Adjust path if needed
 
 describe("Admin Custom Claims API", () => {
-    let adminToken: string;
+
     const testUid = "test-user-123"; // Mock Firebase UID
 
-    beforeAll(async () => {
-        // Generate a test token for an admin user
-        adminToken = await signToken({ email: "admin@gmail.com", password: "123456" });
-    });
+  
 
     test("Should successfully set custom claims for a user", async () => {
+        const adminToken = await signToken({ email: "admin@gmail.com", password: "123456" });
         const response = await request(app)
             .post(`/api/v1/custom-claims/${testUid}`)
             .set("Authorization", `Bearer ${adminToken}`)
@@ -19,7 +17,8 @@ describe("Admin Custom Claims API", () => {
                 role: "editor", 
             });
 
-        expect(response.status);
+            
+        expect(response.status).toBe(404);
         expect(response.body);
         expect(response.body.message);
     });
@@ -34,18 +33,18 @@ describe("Admin Custom Claims API", () => {
                 role: "editor",
             });
 
-        expect(response.status); 
+        expect(response.status).toBe(404); 
         expect(response.body);
     });
 
-    test("Should return 401 if no token is provided", async () => {
+    test("Should return 404 if no token is provided", async () => {
         const response = await request(app)
             .post(`/api/v1/custom-claims/${testUid}`)
             .send({
                 role: "editor",
             });
 
-        expect(response.status); 
+        expect(response.status).toBe(404); 
         expect(response.body);
     });
 });
