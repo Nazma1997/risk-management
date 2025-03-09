@@ -46,6 +46,7 @@ export const getItems = async (
     collectionName: string
 ): Promise<FirebaseFirestore.QuerySnapshot> => {
     try {
+       
         return await db.collection(collectionName).get();
     } catch (error: unknown) {
         throw new RepositoryError(

@@ -6,23 +6,28 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 
 
 
-export const userDetails = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const userDetails = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     const { id } = req.params;
+  
     if (!id) {
-        res.status(400).json({ message: 'User id is required' });
-        return;
+      res.status(400).json({ message: 'User id is required' });
+      return;
     }
-
+  
     try {
-        const user: UserRecord = await auth.getUser(id);
-        res.status(200).json({
-            success: true,
-            data: user
-        });
+      const user: UserRecord = await auth.getUser(id);
+      res.status(200).json({
+        success: true,
+        data: user,
+      });
     } catch (error) {
-        next(error)
+      next(error);
     }
-}
+  };
 export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const { email, password } = req.body;
 

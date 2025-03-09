@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 import userRoutes from './user'
 import adminRoutes from './admin'
-import loanRoutes from './items'
+import loanRoutes from './loan'
 
 const router: Router = express.Router();
 

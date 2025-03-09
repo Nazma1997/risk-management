@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import {  login, userDetails } from '../controllers/user';
+import { userDetails, login } from '../controllers/user';
 import { isAuthenticate } from '../middleware/authenticate';
 import { isAuthorize } from '../middleware/authorize';
 ;
